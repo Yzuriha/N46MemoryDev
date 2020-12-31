@@ -1,0 +1,496 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	/* background: linear-gradient(to bottom right, #ac49bb, #b968c559); */
+	font-family: 'Lato' !important;
+	font-size: 1.1em;
+	color: #7e1083;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.header i {
+	top: 15px;
+	font-size: 20px;
+	position: absolute;
+	cursor: pointer;
+}
+
+h1 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin-bottom: 0;
+}
+
+h2 {
+	font-size: 3em;
+	margin: 15px;
+}
+
+li {
+	margin: 6px;
+}
+
+li img {
+	width: 50%;
+}
+
+input, label {
+	cursor: pointer;
+}
+
+.underline{
+    display:inline-block;
+    border-bottom:2px solid #7e1083;
+    padding:5px 7px 2px 7px;
+		margin: 0 10px;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+	/* width: 80vw; */
+	width: 95vw;
+	/* min-height: 680px; */
+	/* background: #000; */
+	padding: 0;
+	border-radius: 10px;
+	/* box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5); */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	/* margin: 0 0 3em; */
+}
+
+.deck .card {
+	height: 10.4vw;
+	width: 10.4vw;
+	background: white;
+	user-select: none;
+	font-size: 0;
+	/* border: #7e1083 7px solid; */
+	color: #000;
+	border-radius: 20px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation-duration: .6s;
+	animation-name: flipYBack;
+	/* box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5); */
+}
+
+.deck .card.open, .deck .card.match {
+	cursor: default;
+	animation-duration: .6s;
+  animation-name: flipY;
+	box-shadow: inset 0 0 0 6px #d4a2dc, 0 0 1px transparent;
+	background-size: cover !important;
+}
+
+.deck .card.match {
+	box-shadow: inset 0 0 0 6px #7e1083, 0 0 1px transparent;
+}
+
+.deck .card.wrong {
+	cursor: default;
+	background: #FF5722;
+	font-size: 3em;
+	/* animation: shake 0.45s cubic-bezier(.36,.07,.19,.97); */
+}
+
+.deck .card.open img, .deck .card.match img {
+	display: none;
+}
+
+.nogiText {
+	width: 285px;
+	margin-top: 15px;
+}
+
+/* Animations section */
+/* _____________________ */
+
+.kill-click {
+	pointer-events: none;
+}
+
+/**TOOLTIP**/
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 520px;
+  background-color: white;
+	font-family: 'Lato';
+  text-align: center;
+  border-radius: 20px;
+  padding: 0 10px;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -260px;
+	cursor: auto;
+	border: #7e1083 3px solid;
+	box-shadow: 6px 6px 20px 4px rgba(126, 16, 131, 0.5);
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.modal-setting-inner .tooltip {
+		top: -25px
+}
+
+/**MODAL**/
+
+.modal {
+	animation: fadeIn ease 0.3s;
+
+	position: absolute;
+  z-index: 15;
+  top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  background: rgba(0,0,0, 0.3);
+  text-align: center;
+}
+
+.modal-inner {
+	width: 500px;
+	/* height: 200px; */
+	background-color: white;
+	margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	border-radius: 20px;
+	box-shadow: inset 0 0 0 5px #7e1083, 0 0 1px transparent;
+}
+
+#restart {
+	padding: 5px;
+	margin: 20px;
+	font-size: 1.5em;
+	cursor: pointer;
+}
+
+.close-button {
+	position: absolute;
+	right: 15px;
+	font-size: 2em;
+	cursor: pointer;
+	font-weight: bolder;
+}
+
+/**MODAL Settings**/
+.modal-setting {
+	animation: fadeIn ease 0.3s;
+	position: absolute;
+  z-index: 15;
+  top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  background: rgba(0,0,0, 0.3);
+  text-align: center;
+}
+
+.modal-setting-inner {
+	/* width: 95vw;
+	height: 95vh; */
+	/* height: 200px; */
+  padding: 15px;
+	background-color: white;
+	margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	border-radius: 20px;
+  border: #7e1083 4px solid
+	}
+
+/**SETTINGS**/
+.setting-wheel {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.setting-wheel:hover {
+	animation-name: rotate;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.cardSelection {
+	text-align: initial;
+	list-style: none
+}
+
+.cardSelection input {
+	margin-right: 10px;
+}
+
+.category {
+	display: flex;
+	flex-grow: wrap;
+}
+
+.saveButton{
+	border: black 1px solid;
+	width: 83px;
+	padding: 5px 7px;
+	background-color: #7e1083;
+	color: white;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Slide down animation for modal window */
+@keyframes slideDown {
+	from {
+		margin-bottom: 100%;
+		height: 1%;
+	}
+	to {
+		margin-bottom: 0%;
+		height: 100%;
+	}
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+@keyframes flipY {
+  from {
+      transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
+
+    40% {
+      transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
+      animation-timing-function: ease-in;
+    }
+
+    60% {
+      transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
+      opacity: 1;
+    }
+
+    80% {
+      transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
+    }
+
+    to {
+      transform: perspective(400px);
+    }
+}
+
+@keyframes flipYBack {
+  from {
+      transform: perspective(400px) rotate3d(0, 1, 0, -90deg);
+      animation-timing-function: ease-in;
+      opacity: 1;
+    }
+
+    40% {
+      transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
+      animation-timing-function: ease-in;
+    }
+
+    60% {
+      transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
+      opacity: 1;
+    }
+
+    80% {
+      transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
+    }
+
+    to {
+      transform: perspective(400px);
+    }
+}
+
+@keyframes fadeIn {
+from{opacity:0;}
+to{opacity:1;}
+}
+
+
+
+
+/* Media breakpoints */
+@media screen and (max-width: 1280px) {
+	/* .deck{
+		min-height: 660px;
+	} */
+	.deck .card {
+		width: 10.5vw;
+		height: 10.5vw;
+	}
+
+}
+
+/* Media breakpoints */
+@media screen and (max-width: 1024px) {
+	/* .deck{
+		min-height: 660px;
+	} */
+	.deck .card {
+		width: 10.5vw;
+		height: 10.5vw;
+	}
+
+}
+
+@media screen and (max-width: 900px) {
+	/* .deck{
+		min-height: 660px;
+	} */
+	.deck .card {
+		width: 16vw;
+		height: 16vw;
+	}
+
+}
+
+@media screen and (max-width: 680px) {
+	/* .deck {
+		width: 90vw;
+		min-height: 600px;
+	} */
+	.deck .card {
+		width: 18vw;
+		height: 18vw;
+	}
+	.deck .card.match,
+	.deck .card.show,
+	.deck .card.wrong {
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	/* .deck {
+		width: 98vw;
+		min-height: 500px;
+	} */
+	.deck .card {
+		width: 19vw;
+		height: 19vw;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.deck {
+		width: 98vw;
+		min-height: 430px;
+		padding: 10px;
+	}
+	.deck .card {
+		width: 20vw;
+		height: 80px;
+	}
+}
+
+
+/**HOVER.CSS**/
+.hvr-border-fade:active, .hvr-border-fade:focus, .hvr-border-fade:hover {
+    box-shadow: inset 0 0 0 0.25vw #d4a2dc, 0 0 1px transparent;
+}
+
+.hvr-border-fade {
+	box-shadow: inset 0 0 0 0.25vw #7e1083, 0 0 1px transparent;
+}
+
+.hvr-underline-from-center:before {
+	background: #7e1083;
+}
+
+.hvr-fade:active, .hvr-fade:focus, .hvr-fade:hover {
+    background-color:  white;
+    color: #7e1083;
+}
+
+
+.hide {
+	display: none;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+#loadingScreen {
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: white;
+	position: fixed;
+	z-index: 9999999;
+}
+
+#loadingScreen img {
+	cursor: pointer;
+	max-width: 370px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
