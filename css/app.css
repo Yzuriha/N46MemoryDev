@@ -149,7 +149,8 @@ input, label {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 520px;
+	width: auto;
+  max-width: 520px;
   background-color: white;
 	font-family: 'Lato';
   text-align: center;
@@ -248,6 +249,7 @@ input, label {
   padding: 15px;
 	background-color: white;
 	margin: 0;
+	width: 60vw;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -259,8 +261,9 @@ input, label {
 /**SETTINGS**/
 .setting-wheel {
 	position: absolute;
-	bottom: 30px;
-	right: 30px;
+	bottom: 1vw;
+	/* padding-bottom: 30px; */
+	right: 1vw;
 	font-size: 30px;
 	cursor: pointer;
 }
@@ -283,7 +286,8 @@ input, label {
 
 .category {
 	display: flex;
-	flex-grow: wrap;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .saveButton{
@@ -383,6 +387,11 @@ to{opacity:1;}
 		height: 10.5vw;
 	}
 
+.modal-setting-inner{
+	width: 40vw;
+	top: 20px;
+	transform: translate(-50%, -0%);
+}
 }
 
 /* Media breakpoints */
@@ -394,10 +403,12 @@ to{opacity:1;}
 		width: 10.5vw;
 		height: 10.5vw;
 	}
-
+	.modal-setting-inner{
+		width: 50vw;
+	}
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 800px) {
 	/* .deck{
 		min-height: 660px;
 	} */
@@ -405,7 +416,18 @@ to{opacity:1;}
 		width: 16vw;
 		height: 16vw;
 	}
-
+	.category {
+		/* display: block; */
+	}
+	.modal-setting-inner{
+		width: 90vw;
+    transform: translate(-50%, -0%);
+		top:20px;
+		/* top: 117%; */
+	}
+	.cardSelection input {
+		/* margin-left: 15vw; */
+	}
 }
 
 @media screen and (max-width: 680px) {
@@ -433,6 +455,7 @@ to{opacity:1;}
 		width: 19vw;
 		height: 19vw;
 	}
+
 }
 
 @media screen and (max-width: 400px) {
@@ -493,4 +516,12 @@ to{opacity:1;}
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.containerTest {
+
+}
+
+.child {
+  margin: 0 auto;
 }
