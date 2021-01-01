@@ -1,9 +1,5 @@
 var dataSetVersion = "2021-12-31"; // Change this when creating a new data set version. YYYY-MM-DD format.
-// var dataSet[dataSetVersion] = {};
-
-// dataSet[dataSetVersion].options = [];
-
-// localStorage.setItem('lastChange', "2020-12-31");
+// ALSO CHANGE VERSION IN config.json
 
 
 

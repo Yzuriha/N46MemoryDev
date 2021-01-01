@@ -4,15 +4,15 @@
   "start_url": "./",
   "scope": ".",
   "display": "standalone",
-  "background_color": "white",
+  "background_color": "#fff",
   "theme_color": "#7e1083",
   "icons": [
     {
-      "src": "data/assets/logoAnimated.svg",
+      "src": "assets/icons/logoAnimated.svg",
       "type": "image/svg", "sizes": "329x329"
     },
     {
-      "src": "data/assets/logo.png",
+      "src": "assets/icons/logo.png",
       "type": "image/png", "sizes": "144x144"
     }
   ]

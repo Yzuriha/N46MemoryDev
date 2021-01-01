@@ -298,7 +298,7 @@ max-width:90vw;
 	justify-content: center;
 }
 
-.saveButton, .defaultButton{
+.saveButton, .defaultButton, .downloadButton{
 	border: black 1px solid;
 	width: 83px;
 	padding: 5px 7px;
@@ -309,9 +309,34 @@ max-width:90vw;
 	margin-top: 15px;
 }
 
-.defaultButton {
+.defaultButton, .downloadButton {
 	width: auto;
 }
+
+.downloadButton {
+  margin-top:5px;
+}
+
+.downloadPrompt {
+    display: none;
+    /* padding: 10px; */
+    /* box-shadow: 0px 0 7px 4px #00000030; */
+    /* justify-content: center; */
+    /* max-width: 300px; */
+    margin: auto;
+    /* margin-top: 10px; */
+}
+
+/* .downloadButton {
+    background: #109d58;
+    color: aliceblue;
+    padding: 5px 10px;
+    min-width: 100px;
+    border-radius: 2px;
+    border: 1px solid #00723b;
+    text-transform: uppercase;
+    /* box-shadow: -10px 6px 5px 1px #109d581a; */
+} */
 
 /* Slide down animation for modal window */
 @keyframes slideDown {
@@ -565,4 +590,14 @@ h2 {
 
 .child {
   margin: 0 auto;
+}
+
+
+
+
+#appContainer {
+    overflow: hidden;
+    display: grid;
+    height: 100vh;
+    grid-template-rows: auto 1fr auto;
 }

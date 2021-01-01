@@ -6,15 +6,17 @@
 	<link rel="manifest" href="manifest.json" />
 	<title>乃木坂46</title>
 	<meta name="og:site_name" content="乃木坂46 Memory">
-  <meta name="og:description" content="Play a simple Memory Game with Cute Girls.">
-  <meta name="og:image" content="https://i.imgur.com/Ee7Zuwi.jpg">
+	<meta name="og:description" content="Play a simple Memory Game with Cute Girls.">
+	<meta name="og:image" content="https://i.imgur.com/Ee7Zuwi.jpg">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.0/css/hover-min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="css/app.css">
-	<link rel="apple-touch-icon" href="data/assets/logo.png">
-	<script>document.addEventListener("touchstart", function(){}, true);</script>
+	<link rel="apple-touch-icon" href="assets/icons/logo.png">
+	<script>
+		document.addEventListener("touchstart", function() {}, true);
+	</script>
 </head>
 
 <body>
@@ -23,10 +25,10 @@
 		<img id="loadingScreenImg" draggable="false">
 		<script>
 			let timestamp = Date.now();
-			if(navigator.onLine){
-				document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg?${timestamp}`;
+			if (navigator.onLine) {
+				document.getElementById("loadingScreenImg").src = `assets/icons/logoAnimated.svg?${timestamp}`;
 			} else {
-				document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg`;
+				document.getElementById("loadingScreenImg").src = `assets/icons/logoAnimated.svg`;
 			}
 		</script>
 	</div>
@@ -34,7 +36,7 @@
 	<div id="main" class="hidden">
 		<div class="container">
 			<div class="header">
-				<img class="nogiText" src="data/assets/NogiText.png" draggable="false">
+				<img class="nogiText" src="assets/icons/NogiText.png" draggable="false">
 				<i class="fas fa-question-circle tooltip">
 					<div class="tooltiptext">
 						<p>This is a simple memory game. Each game, up to 16 randomly chosen girls will be shuffled into the deck for you to play.</p>
@@ -73,7 +75,13 @@
 				</div>
 				<div class="defaultButton hvr-fade" onclick="clearStorage()"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;&nbsp;Default</div>
 				<div class="saveButton hvr-fade" onclick="saveNewSettings()"><i class="far fa-save"></i>&nbsp;&nbsp;&nbsp;Save</div>
-
+				<div class="controllers">
+					<div class="downloadPrompt">
+						<div class="promptControllers">
+							<div class="downloadButton hvr-fade">&nbsp;&nbsp;&nbsp;<i class="fas fa-cloud-download-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Download App&nbsp;&nbsp;&nbsp;</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -81,9 +89,27 @@
 			<i class="fas fa-cog"></i>
 		</div>
 
+
+		<div id="version" style="display:none">
+
+		</div>
 	</div>
 </body>
-<script src="data\data.js"></script>
+<script type="text/javascript">
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker
+			.register(`service-worker.js`)
+			.then(function() {
+				console.log('ServiceWorker registration successful');
+			});
+		navigator.serviceWorker.ready.then(registration => {
+			registration.active.postMessage(JSON.stringify(dataCardSet));
+		});
+	}
+</script>
+<script defer src="js/settings.js"></script>
+<script defer src="js/install-handler.js"></script>
+<script src="js/data.js"></script>
 <script src="js/app.js"></script>
 
 </html>
