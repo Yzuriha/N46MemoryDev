@@ -20,13 +20,13 @@ addEventListener('message', event => {
   })
 
 
-  var extraAssets = ["/css/app.css",
-    "/js/app.js",
-    "/data/data.js",
-    "/data/assets/NogiText.png",
-    "/data/assets/logo.png",
-    "/data/assets/logo.svg",
-    "/data/assets/logoAnimated.svg"]
+  var extraAssets = ["css/app.css",
+    "js/app.js",
+    "data/data.js",
+    "data/assets/NogiText.png",
+    "data/assets/logo.png",
+    "data/assets/logo.svg",
+    "data/assets/logoAnimated.svg"]
   var newCardSet = cardSet.concat(extraAssets);
 
   caches.open(memoryGame).then(cache => {
