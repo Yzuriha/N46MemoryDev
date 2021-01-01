@@ -1,8 +1,15 @@
 const memoryGame = "memoryGame-v1"
 const assets = [
-  // "/",
+  "/",
   "manifest.json",
   "index.html",
+  "css/app.css",
+  "js/app.js",
+  "data/data.js",
+  "data/assets/NogiText.png",
+  "data/assets/logo.png",
+  "data/assets/logo.svg",
+  "data/assets/logoAnimated.svg",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
   "https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.0/css/hover-min.css"
 ]
@@ -19,19 +26,8 @@ addEventListener('message', event => {
     })
   })
 
-
-  var extraAssets = ["css/app.css",
-    "js/app.js",
-    "data/data.js",
-    "data/assets/NogiText.png",
-    "data/assets/logo.png",
-    "data/assets/logo.svg",
-    "data/assets/logoAnimated.svg",
-    "N46Memory/index.html"]
-  var newCardSet = cardSet.concat(extraAssets);
-
   caches.open(memoryGame).then(cache => {
-    newCardSet.forEach((item, i) => {
+    cardSet.forEach((item, i) => {
       cache.add(item);
     });
 
@@ -42,10 +38,7 @@ addEventListener('message', event => {
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(memoryGame).then(cache => {
-      // cache.addAll(assets)
-      assets.forEach((item, i) => {
-        cache.add(item);
-      });
+      cache.addAll(assets)
     })
   )
 })
