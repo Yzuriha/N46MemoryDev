@@ -20,7 +20,7 @@
 		<img id="loadingScreenImg" draggable="false">
 		<script>
 			let timestamp = Date.now();
-			if(navigator.online){
+			if(navigator.onLine){
 				document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg?${timestamp}`;
 			} else {
 				document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg`;
