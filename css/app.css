@@ -388,7 +388,7 @@ to{opacity:1;}
 	}
 
 .modal-setting-inner{
-	width: 40vw;
+	width: 75vw;
 	top: 20px;
 	transform: translate(-50%, -0%);
 }
@@ -404,7 +404,7 @@ to{opacity:1;}
 		height: 10.5vw;
 	}
 	.modal-setting-inner{
-		width: 50vw;
+		width: 95vw;
 	}
 }
 
