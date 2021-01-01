@@ -11,7 +11,8 @@ const assets = [
   "data/assets/logo.svg",
   "data/assets/logoAnimated.svg",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
-  "https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.0/css/hover-min.css"
+  "https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.0/css/hover-min.css",
+  "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 ]
 
 // in the service worker
@@ -46,8 +47,8 @@ self.addEventListener("install", installEvent => {
 /* Serve cached content when offline */
 self.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
     })
   );
 });

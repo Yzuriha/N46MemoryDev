@@ -218,7 +218,8 @@ max-width:90vw;
 
 #restart {
 	padding: 5px;
-	margin: 20px;
+	margin: 0;
+	margin-bottom: 20px;
 	font-size: 1.5em;
 	cursor: pointer;
 }
@@ -512,6 +513,10 @@ to{opacity:1;}
 
 .hide {
 	display: none;
+}
+
+.hidden {
+	visibility: hidden;
 }
 
 .inline-block {

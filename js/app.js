@@ -59,6 +59,8 @@ function updateActiveGirls() {
   });
 
   saveSettingsToLocalStorage(dataCardSet);
+  helpCounter = 0;
+  timerStarted = false;
 
 }
 
@@ -178,8 +180,19 @@ function saveNewSettings() {
 // 	cards.forEach(card => card.removeEventListener('click', startTimer))
 // }
 
+var timerStarted = false;
+var startTime = 0;
+var helpCounter = 0;
+
 // Cards checker that holds a maximum of 2 cards
 function check() {
+
+  timerStarted = true;
+  if(timerStarted && helpCounter == 0) {
+    startTime = Date.now();
+    helpCounter++;
+  }
+
   // Push card into opened cards
   vs.push(this);
   // While opened cards length is 2 check:
@@ -242,7 +255,12 @@ function reveal() {
 // Display a modal for completing the game
 //---------------------------
 function winner() {
+  let finalTime = Date.now() - startTime;
+  // Math.abs(startTime - Date.now());
   document.getElementsByClassName("modal")[0].classList.remove("hide");
+  document.getElementById("victoryText").innerHTML = `You took ${Math.floor(finalTime / 1000)} seconds to find ${pairs} pairs.`;
+  helpCounter = 0;
+  timerStarted = false;
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -314,10 +332,29 @@ function fadeIn(el, display) {
   })();
 };
 
-setTimeout(function() {
-  fadeOut(document.getElementById("loadingScreen"))
-  fadeIn(document.getElementById("main"))
-}, 2300);
+// setTimeout(function() {
+//   $(#loadingScreen).fadeOut()
+//   $(#main).fadeIn()
+//   // fadeOut(document.getElementById("loadingScreen"))
+//   // fadeIn(document.getElementById("main"))
+// }, 2300);
+
+// $( document ).ready(function() {
+//   $('#loadingScreen').fadeOut(2300)
+//   $('#main').fadeIn()
+//
+// });
+
+
+setTimeout(function(){
+  toggleLoadingScreen()
+}, 2500);
+
+function toggleLoadingScreen (){
+  $("#loadingScreen").fadeOut();
+  // $('#main').fadeIn();
+  document.getElementById("main").classList.remove("hidden")
+}
 
 buildSettings();
 

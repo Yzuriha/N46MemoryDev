@@ -11,6 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.0/css/hover-min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="css/app.css">
 	<link rel="apple-touch-icon" href="data/assets/logo.png">
 </head>
@@ -29,7 +30,7 @@
 		</script>
 	</div>
 
-	<div id="main">
+	<div id="main" class="hidden">
 		<div class="container">
 			<div class="header">
 				<img class="nogiText" src="data/assets/NogiText.png" draggable="false">
@@ -46,6 +47,7 @@
 			<div class="modal-inner">
 				<div class="close-button" onclick="addHideModal()">✖</div>
 				<h2>Victory!</h2>
+				<p id="victoryText"></p>
 				<p id="restart" class="hvr-underline-from-center" onclick="saveNewSettings()">↻ Play Again</p>
 			</div>
 		</div>
