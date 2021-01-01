@@ -179,8 +179,10 @@ input, label {
 
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext, .tooltip:active .tooltiptext {
   visibility: visible;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .modal-setting-inner .tooltip {
@@ -230,6 +232,7 @@ max-width:90vw;
 	font-size: 2em;
 	cursor: pointer;
 	font-weight: bolder;
+	color: #7e1083 !important;
 }
 
 /**MODAL Settings**/
@@ -271,11 +274,13 @@ max-width:90vw;
 	cursor: pointer;
 }
 
-.setting-wheel:hover {
+.setting-wheel:hover, .setting-wheel:active{
 	animation-name: rotate;
 	animation-duration: 4s;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .cardSelection {
@@ -293,7 +298,7 @@ max-width:90vw;
 	justify-content: center;
 }
 
-.saveButton{
+.saveButton, .defaultButton{
 	border: black 1px solid;
 	width: 83px;
 	padding: 5px 7px;
@@ -301,6 +306,11 @@ max-width:90vw;
 	color: white;
 	border-radius: 4px;
 	cursor: pointer;
+	margin-top: 15px;
+}
+
+.defaultButton {
+	width: auto;
 }
 
 /* Slide down animation for modal window */
@@ -488,6 +498,12 @@ to{opacity:1;}
 }
 .modal-setting-inner .tooltiptext{
 	    margin-left: -233px;
+}
+h2 {
+	margin-right: 0;
+}
+.close-button {
+	font-size: 1em;
 }
 }
 
