@@ -204,6 +204,7 @@ input, label {
 
 .modal-inner {
 	width: 500px;
+max-width:90vw;
 	/* height: 200px; */
 	background-color: white;
 	margin: 0;
