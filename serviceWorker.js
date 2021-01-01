@@ -1,6 +1,6 @@
 const memoryGame = "memoryGame-v1"
 const assets = [
-  "/",
+  // "/",
   "manifest.json",
   "index.html",
   "css/app.css",
