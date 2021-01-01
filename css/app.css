@@ -110,12 +110,12 @@ input, label {
 	cursor: default;
 	animation-duration: .6s;
   animation-name: flipY;
-	box-shadow: inset 0 0 0 6px #d4a2dc, 0 0 1px transparent;
+	box-shadow: inset 0 0 0 0.25vw #d4a2dc, 0 0 1px transparent;
 	background-size: cover !important;
 }
 
 .deck .card.match {
-	box-shadow: inset 0 0 0 6px #7e1083, 0 0 1px transparent;
+	box-shadow: inset 0 0 0 0.25vw #7e1083, 0 0 1px transparent;
 }
 
 .deck .card.wrong {
@@ -262,9 +262,9 @@ input, label {
 /**SETTINGS**/
 .setting-wheel {
 	position: fixed;
-	bottom: 1vw;
+	bottom: 1.5vw;
 	/* padding-bottom: 30px; */
-	right: 1vw;
+	right: 1.5vw;
 	font-size: 30px;
 	cursor: pointer;
 }
