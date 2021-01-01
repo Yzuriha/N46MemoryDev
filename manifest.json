@@ -1,7 +1,7 @@
 {
   "name": "乃木坂46 Memory",
   "short_name": "N46 Memory",
-  "start_url": "/N46Memory/",
+  "start_url": "/N46Memory/index.html",
   "display": "standalone",
   "background_color": "white",
   "theme_color": "#7e1083",
