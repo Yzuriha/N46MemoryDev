@@ -38,7 +38,10 @@ addEventListener('message', event => {
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(memoryGame).then(cache => {
-      cache.addAll(assets)
+      // cache.addAll(assets)
+      assets.forEach((item, i) => {
+        cache.add(item);
+      });
     })
   )
 })
