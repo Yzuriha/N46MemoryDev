@@ -149,8 +149,9 @@ input, label {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-	width: auto;
-  max-width: 520px;
+	/* width: auto; */
+	width: 520px;
+  /* max-width: 520px; */
   background-color: white;
 	font-family: 'Lato';
   text-align: center;
@@ -406,6 +407,13 @@ to{opacity:1;}
 	.modal-setting-inner{
 		width: 95vw;
 	}
+
+	.tooltip .tooltiptext {
+		width: 300px;
+	}
+	.tooltip .tooltiptext::after {
+		    left: 87.5%;
+}
 }
 
 @media screen and (max-width: 800px) {
@@ -456,6 +464,7 @@ to{opacity:1;}
 		height: 19vw;
 	}
 
+
 }
 
 @media screen and (max-width: 400px) {
@@ -468,6 +477,16 @@ to{opacity:1;}
 		width: 20vw;
 		height: 80px;
 	}
+
+	.tooltip .tooltiptext {
+		width: 250px;
+	}
+	.tooltip .tooltiptext::after {
+				display: none;
+}
+.modal-setting-inner .tooltiptext{
+	    margin-left: -233px;
+}
 }
 
 
