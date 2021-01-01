@@ -3,13 +3,6 @@ const assets = [
   // "/",
   "manifest.json",
   "index.html",
-  "/css/app.css",
-  "/js/app.js",
-  "/data/data.js",
-  "/data/assets/NogiText.png",
-  "/data/assets/logo.png",
-  "/data/assets/logo.svg",
-  "/data/assets/logoAnimated.svg",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
   "https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.0/css/hover-min.css"
 ]
@@ -25,6 +18,16 @@ addEventListener('message', event => {
       cardSet.push(`data/images/${img}`)
     })
   })
+
+
+  var extraAssets = ["/css/app.css",
+    "/js/app.js",
+    "/data/data.js",
+    "/data/assets/NogiText.png",
+    "/data/assets/logo.png",
+    "/data/assets/logo.svg",
+    "/data/assets/logoAnimated.svg"]
+  cardSet.concat(extraAssets)
 
   caches.open(memoryGame).then(cache => {
     cardSet.forEach((item, i) => {
