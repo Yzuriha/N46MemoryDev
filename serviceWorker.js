@@ -26,7 +26,8 @@ addEventListener('message', event => {
     "data/assets/NogiText.png",
     "data/assets/logo.png",
     "data/assets/logo.svg",
-    "data/assets/logoAnimated.svg"]
+    "data/assets/logoAnimated.svg",
+    "N46Memory/index.html"]
   var newCardSet = cardSet.concat(extraAssets);
 
   caches.open(memoryGame).then(cache => {
