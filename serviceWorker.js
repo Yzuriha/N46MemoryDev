@@ -27,10 +27,10 @@ addEventListener('message', event => {
     "/data/assets/logo.png",
     "/data/assets/logo.svg",
     "/data/assets/logoAnimated.svg"]
-  cardSet.concat(extraAssets)
+  var newCardSet = cardSet.concat(extraAssets);
 
   caches.open(memoryGame).then(cache => {
-    cardSet.forEach((item, i) => {
+    newCardSet.forEach((item, i) => {
       cache.add(item);
     });
 
