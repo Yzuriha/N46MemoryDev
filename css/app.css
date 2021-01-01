@@ -261,7 +261,7 @@ input, label {
 
 /**SETTINGS**/
 .setting-wheel {
-	position: absolute;
+	position: fixed;
 	bottom: 1vw;
 	/* padding-bottom: 30px; */
 	right: 1vw;
