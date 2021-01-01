@@ -1,14 +1,13 @@
 const memoryGame = "memoryGame-v1"
 const assets = [
   "/",
-  "N46Memory",
   "manifest.json",
   "index.html",
   "css/app.css",
   "js/app.js",
   "data/data.js",
   "data/assets/NogiText.png",
-  "N46Memory/data/assets/logo.png",
+  "data/assets/logo.png",
   "data/assets/logo.svg",
   "data/assets/logoAnimated.svg",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
