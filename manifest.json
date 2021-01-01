@@ -9,6 +9,10 @@
     {
       "src": "/data/assets/logoAnimated.svg",
       "type": "image/svg", "sizes": "329x329"
+    },
+    {
+      "src": "/data/assets/logo.png",
+      "type": "image/png", "sizes": "144x144"
     }
   ]
 }
