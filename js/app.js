@@ -106,7 +106,7 @@ function buildDeck() {
   let currentDiv = document.getElementById('deck');
   deck.forEach(item => {
     let cardID = item.name + cardCreationCount++;
-    currentDiv.insertAdjacentHTML('beforeend', `<li data-value=${item.name} id="${cardID}" class="card hvr-border-fade"><img src="data/images/logo.svg" draggable="false"></li>`);
+    currentDiv.insertAdjacentHTML('beforeend', `<li data-value=${item.name} id="${cardID}" class="card hvr-border-fade"><img src="data/assets/logo.svg" draggable="false"></li>`);
     cssClassFull += `#${cardID}.open, #${cardID}.match {background-image: url("data/images/${item.img}")}`
     if (cardCreationCount == 2) cardCreationCount = 0;
   });
@@ -323,3 +323,17 @@ buildSettings();
 
 // After content is loaded game reset function is called
 document.addEventListener('DOMContentLoaded', gameInit());
+
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker
+      .register("serviceWorker.js")
+      .then(res => console.log("service worker registered"))
+      .catch(err => console.log("service worker not registered", err))
+
+      navigator.serviceWorker.ready.then( registration => {
+        registration.active.postMessage(JSON.stringify(dataCardSet));
+      });
+  })
+}

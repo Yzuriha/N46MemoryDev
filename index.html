@@ -3,6 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
+	<link rel="manifest" href="manifest.json" />
 	<title>乃木坂46</title>
 	<meta name="og:site_name" content="Nogizaka46 Song Sorting">
   <meta name="og:description" content="Play a single Memory Game with Cute Girls.">
@@ -19,7 +20,11 @@
 		<img id="loadingScreenImg" draggable="false">
 		<script>
 			let timestamp = Date.now();
-			document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg?${timestamp}`;
+			if(navigator.online){
+				document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg?${timestamp}`;
+			} else {
+				document.getElementById("loadingScreenImg").src = `data/assets/logoAnimated.svg`;
+			}
 		</script>
 	</div>
 
