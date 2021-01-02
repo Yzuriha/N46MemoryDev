@@ -276,6 +276,20 @@ input, label {
   justify-content: center;
 }
 
+.additionalSettings {
+  margin-bottom: 15px;
+}
+
+#pairs {
+  width: 25px;
+  font-family: "Lato";
+  text-align: center;
+  color: #7e1083;
+  height: 20px;
+  border: 1px grey solid;
+  border-radius: 4px;
+}
+
 .saveButton, .defaultButton, .downloadButton {
   border: black 1px solid;
   width: 83px;

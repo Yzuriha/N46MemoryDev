@@ -8,6 +8,7 @@ let filesToCache = [
   "js/settings.js",
   "js/data.js",
   "css/app.css",
+  "css/toggle.css",
   "css/fonts/Lato-Regular.ttf",
   "assets/icons/icon.png",
   "assets/icons/NogiText.png",

@@ -75,22 +75,30 @@ function buildDeck() {
   });
 
   let shuffledDeck = shuffle(newDataCardSet);
-  let shuffledDeckSize = shuffledDeck.length < 16 ? shuffledDeck.length : 16;
+  var pairsAmount = document.getElementById("pairs").value;
+  let shuffledDeckSize = shuffledDeck.length < pairsAmount ? shuffledDeck.length : pairsAmount;
+  pairs = shuffledDeckSize;
+
+
   // shuffle the JSON entries
   // put all items into an array twice, since there are two pictures
+  let isEasyMode = document.getElementById("easyMode").checked;
   for (var i = 0; i < shuffledDeckSize; i++) {
     let item = shuffledDeck[i];
     let imgQuantityArray = shuffle([...Array(Object.keys(item.img).length).keys()]);
+    // to choose an easy image, first create an array with random numbers that has a max size of amount of images
+    // then shuffle that array and take one number out of it. that number is now random and is the index of the imageArray
+    let easyModeImg = item.img[shuffle([...Array(imgQuantityArray.length).keys()])[0]];
     // put same card in twice, but with a different picture
     deck.push({
       "name": item.name.replace(/\s+/g, '').toLowerCase(),
       "group": item.group,
-      "img": item.img[imgQuantityArray.pop()]
+      "img": isEasyMode ? easyModeImg : item.img[imgQuantityArray.pop()]
     });
     deck.push({
       "name": item.name.replace(/\s+/g, '').toLowerCase(),
       "group": item.group,
-      "img": item.img[imgQuantityArray.pop()]
+      "img": isEasyMode ? easyModeImg : item.img[imgQuantityArray.pop()]
     });
   }
 
@@ -193,8 +201,8 @@ function check() {
 // Opened cards match function add's 'match' class and add's them to matched pairs, if matched pairs is 8 call's winner function with a delay of 200ms, if matched pairs is smaller then 8 calls moves counter and reset checker
 function match() {
   pairs++;
-  // if (pairs === document.getElementsByClassName('card').length / 2) {
-    if (pairs === 1) {
+  if (pairs === document.getElementsByClassName('card').length / 2) {
+    // if (pairs === 1) {
     vs[0].classList.add('match');
     vs[1].classList.add('match');
     setTimeout(winner, 500);
