@@ -351,6 +351,19 @@ var dataCardSet =
       ]
    },
    {
+      "name":"Endo Sakura",
+      "group":"Nogizaka46",
+      "gen":"4ki",
+      "active":0,
+      "img":[
+        "meh1.jpg",
+        "meh2.jpg",
+        "meh3.jpg",
+        "meh4.jpg",
+        "meh5.jpg",
+      ]
+   },
+   {
       "name":"Hayashi Runa",
       "group":"Nogizaka46",
       "gen":"4ki",

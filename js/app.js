@@ -11,15 +11,6 @@ const board = document.querySelector('.deck');
 
 function buildSettings() {
 
-  if (localStorage.getItem("lastChange") == undefined) {
-    localStorage.setItem("lastChange", dataSetVersion)
-  }
-
-  if (localStorage.getItem("lastChange") < dataSetVersion) {
-    localStorage.removeItem('dataCardSet');
-    localStorage.setItem("lastChange", dataSetVersion);
-  }
-
   let getLocalStorageDataCardSet = localStorage.getItem('dataCardSet') != null ? JSON.parse(localStorage.getItem('dataCardSet')) : dataCardSet;
   let nogi1ki = document.getElementById('nogi1ki');
   let nogi2ki = document.getElementById('nogi2ki');
@@ -332,19 +323,6 @@ function fadeIn(el, display) {
   })();
 };
 
-// setTimeout(function() {
-//   $(#loadingScreen).fadeOut()
-//   $(#main).fadeIn()
-//   // fadeOut(document.getElementById("loadingScreen"))
-//   // fadeIn(document.getElementById("main"))
-// }, 2300);
-
-// $( document ).ready(function() {
-//   $('#loadingScreen').fadeOut(2300)
-//   $('#main').fadeIn()
-//
-// });
-
 
 setTimeout(function(){
   toggleLoadingScreen()
@@ -374,8 +352,6 @@ function main(){
 }
 
 
-
-
 function vaildateCacheIfOnline(){
 
     return new Promise((resolve,reject)=>{
@@ -395,8 +371,9 @@ function vaildateCacheIfOnline(){
                 fetch(`config.json?clean-cache=true&cacheBust=${new Date().getTime()}`).then(_ => {
                     //actually cleans the cache
                     Settings.setVersion(config.version);
+                    localStorage.removeItem('dataCardSet');
+                    console.log("Old dataset removed. Reloading for new version.")
                     window.location.reload();
-
                     return resolve();  // unnecessary
                 });
 
