@@ -1,7 +1,7 @@
 let cacheName = "memoryGame-v1";
 
 let filesToCache = [
-  "/N46Memory/",
+  "/N46MemoryDev/",
   "service-worker.js",
   "js/app.js",
   "js/install-handler.js",
