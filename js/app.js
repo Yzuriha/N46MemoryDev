@@ -9,8 +9,10 @@ var pairs = 0;
 // Variable that holds all cards aka board
 const board = document.querySelector('.deck');
 
+// create the settings menu
 function buildSettings() {
 
+  // we want to take the saved settings in local storage if possible, else just grab the default version
   let getLocalStorageDataCardSet = localStorage.getItem('dataCardSet') != null ? JSON.parse(localStorage.getItem('dataCardSet')) : dataCardSet;
   let nogi1ki = document.getElementById('nogi1ki');
   let nogi2ki = document.getElementById('nogi2ki');
@@ -39,6 +41,7 @@ function buildSettings() {
   });
 }
 
+// in case the user changed the active girls, update the dataset and save to localStorage
 function updateActiveGirls() {
   let allCards = document.querySelectorAll(".cardSelection input");
   allCards.forEach((item, i) => {
@@ -55,9 +58,9 @@ function updateActiveGirls() {
 
 }
 
+// take settings and create a deck of the girls
 function buildDeck() {
   updateActiveGirls()
-  // clearBoard();
   let activeGirls = document.querySelectorAll(".cardSelection input:checked");
   let activeGirlsNameArray = [];
   activeGirls.forEach(item => {
@@ -71,9 +74,6 @@ function buildDeck() {
     }
   });
 
-
-
-  // let shuffledDeck = shuffle(dataCardSet);
   let shuffledDeck = shuffle(newDataCardSet);
   let shuffledDeckSize = shuffledDeck.length < 16 ? shuffledDeck.length : 16;
   // shuffle the JSON entries
@@ -81,6 +81,7 @@ function buildDeck() {
   for (var i = 0; i < shuffledDeckSize; i++) {
     let item = shuffledDeck[i];
     let imgQuantityArray = shuffle([...Array(Object.keys(item.img).length).keys()]);
+    // put same card in twice, but with a different picture
     deck.push({
       "name": item.name.replace(/\s+/g, '').toLowerCase(),
       "group": item.group,
@@ -93,7 +94,7 @@ function buildDeck() {
     });
   }
 
-
+  // create HTML elements for all the cards
   let cardCreationCount = 0;
   let cssClassFull = "";
   let currentDiv = document.getElementById('deck');
@@ -104,15 +105,15 @@ function buildDeck() {
     if (cardCreationCount == 2) cardCreationCount = 0;
   });
 
+  // small cheat to create flipped cards images by adding some css
   let style = document.createElement('style');
   style.type = 'text/css';
   style.id = "dynamicImages";
   style.innerHTML = cssClassFull;
   document.getElementsByTagName('head')[0].appendChild(style);
-
-
 }
 
+// just reset the board for a new game
 function clearBoard() {
   let allCards = Array.from(document.getElementsByClassName("card"));
   allCards.forEach((item, i) => {
@@ -122,7 +123,6 @@ function clearBoard() {
   if (document.getElementById("dynamicImages") != undefined) {
     document.getElementById("dynamicImages").remove();
   }
-
   deck = [];
 }
 
@@ -144,16 +144,11 @@ function gameInit() {
   // Variable for shuffled cards
   let mixCards = shuffle(cards);
 
-  // Append each mixed card to the board
-  // Set up the event listener for a card. If a card is clicked:
-  // - display the card's symbol
-  // - start the timer (is removed after timer starts)
   for (let i = 0; i < mixCards.length; i++) {
     board.append(mixCards[i]);
-    cards[i].classList.remove('open', 'wrong', 'match', 'kill-click')
+    cards[i].classList.remove('open', 'match', 'kill-click')
     cards[i].addEventListener('click', reveal);
     cards[i].addEventListener('click', check);
-    // cards[i].addEventListener('click', startTimer);
   };
 
   addHideModal();
@@ -165,12 +160,6 @@ function saveNewSettings() {
   addHideModalSetting();
 }
 
-// Start counter and remove event listeners from all other cards
-// function startTimer() {
-// 	// timer();
-// 	cards.forEach(card => card.removeEventListener('click', startTimer))
-// }
-
 var timerStarted = false;
 var startTime = 0;
 var helpCounter = 0;
@@ -178,6 +167,7 @@ var helpCounter = 0;
 // Cards checker that holds a maximum of 2 cards
 function check() {
 
+  // creating a timer to tell the user how long they needed; can probably done better but /shrug
   timerStarted = true;
   if(timerStarted && helpCounter == 0) {
     startTime = Date.now();
@@ -203,7 +193,8 @@ function check() {
 // Opened cards match function add's 'match' class and add's them to matched pairs, if matched pairs is 8 call's winner function with a delay of 200ms, if matched pairs is smaller then 8 calls moves counter and reset checker
 function match() {
   pairs++;
-  if (pairs === document.getElementsByClassName('card').length / 2) {
+  // if (pairs === document.getElementsByClassName('card').length / 2) {
+    if (pairs === 1) {
     vs[0].classList.add('match');
     vs[1].classList.add('match');
     setTimeout(winner, 500);
@@ -219,8 +210,6 @@ function match() {
   };
 }
 
-// Opened cards noMatch function add's 'wrong' class so you can view them (otherwise second card will not flip, it will for 1ms),
-// call reset match function with timer to allow card view for x ammount of ms, and the moves counter
 function noMatch() {
   setTimeout(resetCheck, 1000);
 }
@@ -237,21 +226,32 @@ function resetCheck() {
 
 // Display symbol (Add or remove classes to card)
 function reveal() {
-  // vs[0].classList.remove('close');
-  // vs[1].classList.remove('close');
   this.classList.toggle('open');
   this.classList.toggle('kill-click');
 }
 
 // Display a modal for completing the game
-//---------------------------
 function winner() {
   let finalTime = Date.now() - startTime;
   // Math.abs(startTime - Date.now());
   document.getElementsByClassName("modal")[0].classList.remove("hide");
-  document.getElementById("victoryText").innerHTML = `You took ${Math.floor(finalTime / 1000)} seconds to find ${pairs} pairs.`;
+  document.getElementById("victoryText").innerHTML = `You took ${secondsToHms(Math.floor(finalTime / 1000))} to find ${pairs} pairs.`;
   helpCounter = 0;
   timerStarted = false;
+}
+
+// converts the time from seconds to min + seconds, taken from https://stackoverflow.com/questions/37096367/how-to-convert-seconds-to-minutes-and-hours-in-javascript/37096923
+function secondsToHms(d) {
+    d = Number(d);
+    // var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    // var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    // return hDisplay + mDisplay + sDisplay;
+    return mDisplay + sDisplay;
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -271,16 +271,12 @@ function shuffle(array) {
 
 //Save settings to local storage
 function saveSettingsToLocalStorage(item) {
-
   //Retrieve data from local storage and append to highscore
   localStorage.setItem('dataCardSet', JSON.stringify(item));
-  // populateList(getHighscores, highscoreList);
 }
 
 function addHideModal() {
   document.getElementsByClassName("modal")[0].classList.add("hide");
-  // board.classList.add('kill-click');
-
 }
 
 function addHideModalSetting() {
@@ -310,29 +306,15 @@ function fadeOut(el) {
   })();
 };
 
-// ** FADE IN FUNCTION **
-function fadeIn(el, display) {
-  el.style.opacity = 0;
-  el.style.display = display || "block";
-  (function fade() {
-    var val = parseFloat(el.style.opacity);
-    if (!((val += .1) > 1)) {
-      el.style.opacity = val;
-      requestAnimationFrame(fade);
-    }
-  })();
-};
-
+// fade out the loadingScreen after its done loading
+function toggleLoadingScreen (){
+  $("#loadingScreen").fadeOut();
+  document.getElementById("main").classList.remove("hidden")
+}
 
 setTimeout(function(){
   toggleLoadingScreen()
 }, 2500);
-
-function toggleLoadingScreen (){
-  $("#loadingScreen").fadeOut();
-  // $('#main').fadeIn();
-  document.getElementById("main").classList.remove("hidden")
-}
 
 buildSettings();
 
@@ -340,22 +322,17 @@ buildSettings();
 document.addEventListener('DOMContentLoaded', gameInit());
 
 
-
+//----------------- SERVICE WORKER STUFF -----------------------
 window.addEventListener('load',main)
 function main(){
-
     vaildateCacheIfOnline()
     .then(_=>{
-
     })
-
 }
 
-
+// if settings in the config.json have changed, then update the cache
 function vaildateCacheIfOnline(){
-
     return new Promise((resolve,reject)=>{
-
         fetch(`config.json?cacheBust=${new Date().getTime()}`)
         .then(response => { return response.json() })
         .then(config => {
@@ -389,5 +366,5 @@ function vaildateCacheIfOnline(){
             //handle offline here
         })
     })
-
 }
+//----------------- END SERVICE WORKER STUFF -----------------------
