@@ -286,6 +286,7 @@ input, label {
   text-align: center;
   color: #7e1083;
   height: 20px;
+  vertical-align: middle;
   border: 1px grey solid;
   border-radius: 4px;
 }
